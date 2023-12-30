@@ -2,6 +2,7 @@ GOCMD=go
 GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
+GOTESTSUM=$(GOCMD) run gotest.tools/gotestsum@latest
 BINARY_NAME=bin/monkey
 
 build:
@@ -9,7 +10,8 @@ build:
 	$(GOBUILD) -o $(BINARY_NAME) -v 
 test: 
 	clear
-	$(GOTEST) -v ./...
+	# $(GOTEST) -v ./...
+	$(GOTESTSUM)
 clean: 
 	$(GOCLEAN)
 	rm -f $(BINARY_NAME)
