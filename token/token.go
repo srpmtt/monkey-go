@@ -35,6 +35,7 @@ const (
 
 	IDENT = "IDENT"
 	INT   = "INT"
+	FLOAT = "FLOAT"
 )
 
 type Token struct {
