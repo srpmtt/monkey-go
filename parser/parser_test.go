@@ -6,6 +6,7 @@ import (
 	"testing"
 )
 
+// TESTS
 func TestIdentifierExpressions(t *testing.T) {
 	input := "foobar;"
 
@@ -139,6 +140,7 @@ func TestReturnStatements(t *testing.T) {
 	}
 }
 
+// HELPERS
 func checkParserErrors(t *testing.T, p *Parser) {
 	errors := p.Errors()
 	if len(errors) == 0 {

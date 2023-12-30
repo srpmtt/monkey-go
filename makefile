@@ -11,7 +11,7 @@ build:
 test: 
 	clear
 	# $(GOTEST) -v ./...
-	$(GOTESTSUM)
+	$(GOTESTSUM) --format testdox
 clean: 
 	$(GOCLEAN)
 	rm -f $(BINARY_NAME)
