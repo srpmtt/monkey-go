@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"monkey/repl"
+	"os"
 	"os/user"
 )
 
@@ -13,4 +15,6 @@ func main() {
 	}
 
 	fmt.Printf("Hello %s!\n", user.Username)
+	fmt.Printf("Type commands:\n")
+	repl.Start(os.Stdin, os.Stdout)
 }
