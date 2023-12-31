@@ -3,10 +3,11 @@ package object
 import "fmt"
 
 const (
-	INTEGER_OBJ = "INTEGER"
-	FLOAT_OBJ   = "FLOAT"
-	BOOLEAN_OBJ = "BOOLEAN"
-	NULL_OBJ    = "NULL"
+	INTEGER_OBJ      = "INTEGER"
+	FLOAT_OBJ        = "FLOAT"
+	BOOLEAN_OBJ      = "BOOLEAN"
+	RETURN_VALUE_OBJ = "RETURN_VALUE"
+	NULL_OBJ         = "NULL"
 )
 
 // OBJECT
@@ -40,6 +41,14 @@ type Boolean struct {
 
 func (b *Boolean) Type() ObjectType { return BOOLEAN_OBJ }
 func (b *Boolean) Inspect() string  { return fmt.Sprintf("%t", b.Value) }
+
+// RETURN_VALUE
+type ReturnValue struct {
+	Value Object
+}
+
+func (rv *ReturnValue) Type() ObjectType { return RETURN_VALUE_OBJ }
+func (rv *ReturnValue) Inspect() string  { return rv.Value.Inspect() }
 
 // NULL
 type Null struct{}
