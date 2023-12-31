@@ -1,6 +1,7 @@
 package evaluator
 
 import (
+	"math"
 	"monkey/lexer"
 	"monkey/object"
 	"monkey/parser"
@@ -17,6 +18,17 @@ func TestEvalIntegerExpression(t *testing.T) {
 		{"10", 10},
 		{"-5", -5},
 		{"-10", -10},
+		{"5 + 5 + 5 + 5 - 10", 10},
+		{"2 * 2 * 2 * 2 * 2", 32},
+		{"-50 + 100 + -50", 0},
+		{"5 * 2 + 10", 20},
+		{"5 + 2 * 10", 25},
+		{"20 + 2 * -10", 0},
+		{"50 / 2 * 2 + 10", 60},
+		{"2 * (5 + 10)", 30},
+		{"3 * 3 * 3 + 10", 37},
+		{"3 * (3 * 3) + 10", 37},
+		{"(5 + 10 * 2 + 15 / 3) * 2 + -10", 50},
 	}
 
 	for _, tt := range tests {
@@ -30,8 +42,11 @@ func TestEvalFloatExpression(t *testing.T) {
 		input    string
 		expected float64
 	}{
-		{"5.2", 5.2},
-		{"10.4", 10.4},
+		{"5.1", 5.1},
+		{"10.2", 10.2},
+		{"-5.3", -5.3},
+		{"-10.4", -10.4},
+		{"5.5 + 5.6 + 5.7 + 5.8 - 10.9", 11.7},
 	}
 
 	for _, tt := range tests {
@@ -74,6 +89,11 @@ func TestBangOperator(t *testing.T) {
 }
 
 // HELPERS
+func roundFloat(val float64, precision int) float64 {
+	p := math.Pow(10, float64(precision))
+	return math.Round(val*p) / p
+}
+
 func testEval(input string) object.Object {
 	l := lexer.New(input)
 	p := parser.New(l)
@@ -105,8 +125,8 @@ func testFloatObject(t *testing.T, obj object.Object, expected float64) bool {
 		return false
 	}
 
-	if result.Value != expected {
-		t.Errorf("object has wrong value. got=%v, want=%.1f",
+	if roundFloat(result.Value, 1) != expected {
+		t.Errorf("object has wrong value. got=%v, want=%f",
 			result.Value, expected)
 		return false
 	}

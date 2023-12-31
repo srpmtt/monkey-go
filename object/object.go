@@ -31,7 +31,7 @@ type Float struct {
 }
 
 func (f *Float) Type() ObjectType { return FLOAT_OBJ }
-func (f *Float) Inspect() string  { return fmt.Sprintf("%.1f", f.Value) }
+func (f *Float) Inspect() string  { return fmt.Sprintf("%f", f.Value) }
 
 // BOOLEAN
 type Boolean struct {
