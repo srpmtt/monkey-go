@@ -1,2 +1,3 @@
 # monkey-go
-Interpreter for monkey lang written in GO
+
+Interpreter for monkey language from [Writing an interpreter in GO](https://interpreterbook.com/) by Thorsten Ball
